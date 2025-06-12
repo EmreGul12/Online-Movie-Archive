@@ -1,0 +1,85 @@
+﻿@model IEnumerable<MovieArchive.Models.Film>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<form method="get" asp-action="Index" class="form-inline mb-3">
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Create" class="btn btn-primary me-3">Create New</a>
+    }
+
+    <select name="sortOrder" onchange="this.form.submit()" class="form-select w-auto d-inline">
+        <option value="" selected="@(string.IsNullOrEmpty(ViewData["CurrentSort"] as string))">Varsayılan</option>
+        <option value="puan" selected="@((ViewData["CurrentSort"] as string) == "puan")">Puan Ortalamasına Göre</option>
+        <option value="yorum" selected="@((ViewData["CurrentSort"] as string) == "yorum")">Yorum Sayısına Göre</option>
+        <option value="izlenme" selected="@((ViewData["CurrentSort"] as string) == "izlenme")">İzlenme Sayısına Göre</option>
+    </select>
+</form>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YayinTarihi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Yoneten)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aciklama)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrtalamaPuan)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tur)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.YayinTarihi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Yoneten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aciklama)
+            </td>
+            <td>
+                    @item.OrtalamaPuan.ToString("F1")
+            </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <text>
+                            | <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            | <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </text>
+                    }
+                </td>
+
+        </tr>
+}
+    </tbody>
+</table>

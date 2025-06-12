@@ -1,0 +1,87 @@
+﻿@model MovieArchive.Models.Film
+@{
+    ViewData["Title"] = Model.Ad;
+}
+
+<h2>@Model.Ad</h2>
+<p>Açıklama: @Model.Aciklama</p>
+<p>Ortalama Puan: @Model.OrtalamaPuan.ToString("F1")</p>
+<p>Toplam İzlenme: @Model.ToplamPuanVerenKisi</p>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h4>Filme Puan Ver</h4>
+
+    @if (TempData["PuanHatasi"] != null)
+    {
+        <div class="alert alert-warning">@TempData["PuanHatasi"]</div>
+    }
+
+    <form asp-action="AddPoint" asp-controller="Films" method="post" class="form-inline mb-3">
+        <input type="hidden" name="filmId" value="@Model.Id" />
+
+        <label for="puan" class="mr-2">Puanınız:</label>
+        <select id="puan" name="puan" class="form-control mr-2">
+            @for (int i = 1; i <= 10; i++)
+            {
+                <option value="@i">@i</option>
+            }
+        </select>
+
+        <button type="submit" class="btn btn-success">Puan Ver</button>
+    </form>
+}
+
+
+
+<hr />
+
+<h3>Yorumlar (@Model.Yorumlar.Count)</h3>
+@if (!Model.Yorumlar.Any())
+{
+    <p>Henüz yorum yok.</p>
+}
+else
+{
+    @foreach (var yorum in Model.Yorumlar.OrderByDescending(y => y.Tarih))
+    {
+        <div class="border rounded p-3 mb-2">
+            <p>@yorum.Icerik</p>
+            <small class="text-muted">
+                Kullanıcı:  @yorum.Uye?.KullaniciAdi |
+                @yorum.Tarih.ToLocalTime().ToString("g")
+            </small>
+        </div>
+    }
+}
+
+<hr />
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h4>Yeni Yorum Ekle</h4>
+    <form asp-action="AddComment" asp-controller="Films" method="post">
+        <div class="form-group">
+            <label for="content">Yorumunuz</label>
+            <textarea id="content"
+                  name="content"
+                  class="form-control"
+                  rows="4">@(ViewData.ModelState["content"]?.AttemptedValue)</textarea>
+            <span class="text-danger">
+                @ViewData.ModelState["content"]?.Errors.FirstOrDefault()?.ErrorMessage
+            </span>
+        </div>
+
+        <input type="hidden" name="filmId" value="@Model.Id" />
+
+        <button type="submit" class="btn btn-primary mt-2">Gönder</button>
+    </form>
+}
+else
+{
+    <p>Yorum yazmak için <a asp-area="Identity" asp-controller="Account" asp-action="Login">giriş yapın</a>.</p>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
