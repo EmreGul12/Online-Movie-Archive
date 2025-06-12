@@ -3,6 +3,11 @@
 Proje youtube videosu: https://youtu.be/ecbBZ18X8QM
 
 
+
+https://github.com/user-attachments/assets/79b0e7f5-cf1b-408d-9bef-6bed3d144b08
+
+
+
 # 🎬 Movie Archive and Rating System
 
 Bu proje, kullanıcıların filmleri görüntüleyebildiği, yorum yapabildiği ve puan verebildiği bir ASP.NET Core MVC uygulamasıdır.
