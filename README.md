@@ -50,3 +50,10 @@ Kullanici ve Admin sınıfları Kullanici sınıfını kalıtım aldı.
 ![Screenshot 2025-06-12 204516](https://github.com/user-attachments/assets/16017502-f5e1-443c-9bfe-f1bf2121f9b0)
 
 Tablosu oluşturulacak entity class’larımız Models klasöründe tutuldu. Gerekli Servicelerimiz ise (Role Based Authentication sağlayan DataSeeder gibi.)Service klasöründe tutuldu.
+
+![image](https://github.com/user-attachments/assets/2ca8a664-32c1-4368-b9fb-59de249984b9)
+![image](https://github.com/user-attachments/assets/1c600331-b429-470e-a1ac-cf1d9876b48f)
+![image](https://github.com/user-attachments/assets/8c9defa3-7d55-4e80-9322-45121adf8006)
+
+Admin için bir login sayfası açmak tehlikeli ve anlamsız olacağından admin oluşturmak için UserId ile RoleId değerlerini kendimiz SQL Server Manangement Studio üzerinden ayarlarız.
+Bunun için yeni bir Uye oluşturmamız ve oluşan Uye'nin dbo.AspNetRoles tablosundaki RoleId değerini değiştirmemiz ve Admin rolü için gerekli olan RoleId değerini atamamız gerekir.
