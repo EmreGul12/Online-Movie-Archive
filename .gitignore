@@ -1,0 +1,58 @@
+## .NET Core
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vscode/
+
+## Rider
+.idea/
+
+## VS Code
+.vscode/
+.vs/
+
+
+## ASP.NET specific
+appsettings.Development.json
+appsettings.Local.json
+
+## Entity Framework Migrations (keep these!)
+# Eğer 'Migrations/' klasöründeki migration kodlarını saklamak istiyorsan, aşağıyı kullanma!
+# Migrations/
+
+## Database Files (bunlar verileri barındırır, genelde yüklemek istemeyiz)
+*.mdf
+*.ldf
+*.ndf
+*.db
+*.sqlite
+*.bak
+*.log
+
+## SQL script dosyaları (bunu dahil ETME, çünkü senin istediğin SQL kodları burada!)
+!*.sql
+
+## Publish çıktıları
+*.publish/
+publish/
+out/
+
+## User secrets (kişisel veriler burada olabilir)
+secrets.json
+
+## Logs
+*.log
+
+## Paketler
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+## Diğer
+Thumbs.db
+desktop.ini
+*.DS_Store
